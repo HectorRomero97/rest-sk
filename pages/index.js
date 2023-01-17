@@ -1,12 +1,9 @@
-import Head from 'next/head'
-import Image from 'next/image'
-import { Inter } from '@next/font/google'
-import styles from '../styles/Home.module.css'
-import { getProducts } from '../services/products'
-import ProductCard from '../components/atoms/ProductCard'
+import Head from "next/head";
+import { getProducts } from "../services/products";
+import ProductCard from "../components/atoms/productcard";
+import Hero from "../components/molecules/hero";
 
 const Home = (products) => {
-  console.log(products);
   return (
     <>
       <Head>
@@ -16,22 +13,37 @@ const Home = (products) => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main>
-        <h1>Tienda</h1>
-        {products.products.map(product => {
-          <ProductCard id={product.id}/>
-        })}
+        <Hero
+          size="fullscreen"
+          imageUrl="https://images.unsplash.com/photo-1483118714900-540cf339fd46?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80"
+        ></Hero>
+        <div className="items-center ">
+          <h1 className="text-bold text-5xl text-center pb-10">Productos de Temporada</h1>
+        <div className="flex flex-wrap justify-evenly max-w">
+          {products.products.map((product) => {
+            return (
+              <>
+                <ProductCard
+                  key={product.id}
+                  imageUrl={product.image}
+                  description={product.description}
+                  title={product.title}
+                />
+              </>
+            );
+          })}
+        </div>
+        </div>
       </main>
     </>
-  )
-}
+  );
+};
 
-export const getServerSideProps = async()  =>{
-  const res = await fetch(`${process.env.API_URL}/products`)
-  const data = await res.json()
-  console.log(data);
+export const getStaticProps = async () => {
+  const data = await getProducts(9);
   return {
-    props: {products: data}
-  }
-}
+    props: { products: data },
+  };
+};
 
 export default Home;
