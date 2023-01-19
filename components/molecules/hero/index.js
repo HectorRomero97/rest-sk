@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 
-const Hero = ({ size, imageUrl }) => {
+const Hero = ({ size, imageUrl, titulo, texto, boton }) => {
      const possibleSizesImage = Object.freeze({
         fullscreen: 'flex items-center justify-center h-screen mb-12 bg-fixed bg-center bg-cover custom-img',
         big: 'flex items-center justify-center h-[60vh] mb-12 bg-fixed bg-center bg-cover custom-img',
@@ -40,10 +40,10 @@ const Hero = ({ size, imageUrl }) => {
             }
           `}</style>
           <div className={setOpacSize(size)} />
-          <div className="p-5 text-white z-[2] mt-[-10rem]">
-            <h2 className="text-5xl font-bold">Demo Tienda</h2>
-            <p className="py-5 text-xl">saludos al Ever</p>
-            <Link href="/store"><button>Comprar</button></Link> 
+          <div className="p-5 text-white z-[2] flex-row">
+            <h2 className="text-5xl font-bold">{titulo}</h2>
+            <p className="py-5 text-xl">{texto}</p>
+            {boton ?  <Link href="/store"><button className="mt-2 px-8 py-2 border">Comprar</button></Link> : <></>}
           </div>
         </div>
       </div>

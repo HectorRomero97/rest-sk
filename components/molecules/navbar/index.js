@@ -2,20 +2,23 @@ import Link from "next/link";
 import { GiHamburgerMenu } from "react-icons/gi";
 import {AiOutlineClose} from 'react-icons/ai'
 import { useEffect, useState } from "react";
+import { useRouter } from "next/router";
+
 
 const Navbar = () => {
   const [hideNav,setHideNav] = useState(false); 
   const [color,setColor] = useState('transparent');
   const [textColor, setTextColor] = useState('white');
+  const [secondNav,setSecondNav] = useState(false);
   const handleNav = () => {
     setHideNav(!hideNav);
   }
-
+  const rutaActual = useRouter().asPath;
   useEffect(() => {
     const changeColor = () =>{
       if(window.scrollY >= 90){
-        setColor('#ffffff');
-        setTextColor('#000000')
+        setColor('#000000');
+        setTextColor('#ffffff')
       }else{
         setColor('transparent')
         setTextColor('#ffffff')
@@ -36,7 +39,7 @@ const Navbar = () => {
               <Link href="/">Inicio</Link>
             </li>
             <li className="p-4">
-              <Link href="/tienda">Tienda</Link>
+              <Link href="/store">Tienda</Link>
             </li>
             <li className="p-4">
               <Link href="">Aviso de Privacidad</Link>
@@ -70,6 +73,7 @@ const Navbar = () => {
             </div>
         </div>
       </div>
+    
     </>
   );
 };

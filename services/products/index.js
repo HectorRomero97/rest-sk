@@ -14,3 +14,9 @@ export const getProducts = async (number) => {
     )
     .then((response) => response.data)
   };
+
+  export const getProductById = async (pid) => {
+    return axios.get(
+      `${process.env.API_URL}/products/${pid}`
+    ).then((response) => response.data)
+  }
