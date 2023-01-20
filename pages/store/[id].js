@@ -51,11 +51,9 @@ const ProductDetail = (product) => {
 
 export async function getStaticPaths() {
   const posts = await getProducts();
-  console.log("ids?", posts);
   const paths = posts.map((product) => ({
     params: { id: product.id.toString() },
   }));
-  console.log("paths?", paths);
   return {
     paths,
     fallback: false, // can also be true or 'blocking'
@@ -63,7 +61,6 @@ export async function getStaticPaths() {
 }
 
 export const getStaticProps = async ({ params }) => {
-  console.log("params?", params.id);
   const data = await getProductById(params.id);
   console.log(data);
   return {
